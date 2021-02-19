@@ -19,16 +19,12 @@ build-options:
   env:
     C_INCLUDE_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/include:/app/include
     CPLUS_INCLUDE_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/include:/app/include
-    PKG_CONFIG_PATH: "/app/share/steam/compatibilitytools.d/Proton-Exp/lib/pkgconfig\
-                     :/app/lib/pkgconfig\
-                     :/app/share/pkgconfig\
-                     :/usr/lib/x86_64-linux-gnu/pkgconfig\
-                     :/usr/share/pkgconfig"
+    PKG_CONFIG_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/lib/pkgconfig:/app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig
     LD_RUN_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/lib
     PYTHONPATH: /app/share/steam/compatibilitytools.d/Proton-Exp/lib/python3.8/site-packages
-  cflags: &optflags -O2 -pipe -march=nocona -mtune=core-avx2 -mfpmath=sse -fwrapv -fno-strict-aliasing
+  cflags: -O2 -pipe -march=nocona -mtune=core-avx2 -mfpmath=sse -fwrapv -fno-strict-aliasing
   cflags-override: true
-  cxxflags: *optflags
+  cxxflags: -O2 -pipe -march=nocona -mtune=core-avx2 -mfpmath=sse -fwrapv -fno-strict-aliasing
   cxxflags-override: true
 
 x-compat-i386-opts: &compat_i386_opts
@@ -38,26 +34,22 @@ x-compat-i386-opts: &compat_i386_opts
   env:
     CC: ccache i686-unknown-linux-gnu-gcc
     CXX: ccache i686-unknown-linux-gnu-g++
-    PKG_CONFIG_PATH: "/app/share/steam/compatibilitytools.d/Proton-Exp/lib32/pkgconfig\
-                     :/app/lib32/pkgconfig\
-                     :/app/share/pkgconfig\
-                     :/usr/lib/i386-linux-gnu/pkgconfig\
-                     :/usr/share/pkgconfig"
+    PKG_CONFIG_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig
     LD_RUN_PATH: /app/share/steam/compatibilitytools.d/Proton-Exp/lib32
   libdir: /app/share/steam/compatibilitytools.d/Proton-Exp/lib32
 
 x-proton-source: &proton_source
   type: git
-  url: "https://github.com/ValveSoftware/Proton.git"
-  tag: experimental-5.13-20210126
-  commit: c8a48ac264758d7411965a60578edfbfe7aec6f0
+  url: https://github.com/ValveSoftware/Proton.git
+  tag: experimental-5.13-20210217
+  commit: 6724f50a06efc906747ce66b95897f9e3757cba8
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+)$
 
 cleanup:
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /include
   - /lib/pkgconfig
   - /lib32/pkgconfig
@@ -217,7 +209,7 @@ modules:
         x86_64: *compat_i386_opts
       env:
         CARGO_HOME: /run/build/media-converter-32bit/media-converter/cargo
-        PKG_CONFIG_ALLOW_CROSS: "1"
+        PKG_CONFIG_ALLOW_CROSS: '1'
         RUST_TARGET: i686-unknown-linux-gnu
         LIBDIR: lib32
     buildsystem: simple
@@ -336,7 +328,7 @@ modules:
     post-install:
       - install -Dm755 bin/win64/openvr_api.dll ${FLATPAK_DEST}/lib/wine/dxvk/openvr_api_dxvk.dll
       - install -Dm755 bin/win32/openvr_api.dll ${FLATPAK_DEST}/lib32/wine/dxvk/openvr_api_dxvk.dll
-    sources: 
+    sources:
       - *proton_source
 
 
@@ -403,7 +395,7 @@ modules:
       config-opts:
         - -L${FLATPAK_DEST}/lib
         - -L${FLATPAK_DEST}/lib/wine
-    config-opts: &wineopenxr_config_opts
+    config-opts:
       - --nosource-fix
       - --nolower-include
       - --nodlls
@@ -423,7 +415,7 @@ modules:
     post-install:
       - install -Dm755 wineopenxr.dll.so -t ${FLATPAK_DEST}/lib/wine/
       - install -Dm755 wineopenxr.dll.fake ${FLATPAK_DEST}/lib/wine/fakedlls/wineopenxr.dll
-    sources: &wineopenxr_sources
+    sources:
       - *proton_source
       - type: file
         path: winemaker-configure.sh
@@ -442,7 +434,7 @@ modules:
     subdir: vkd3d-proton
     buildsystem: meson
     build-options:
-      ldflags: &mingw-ldflags ""
+      ldflags: ''
       ldflags-override: true
       config-opts:
         - --cross-file=../build-win64.txt
@@ -468,7 +460,7 @@ modules:
     subdir: vkd3d-proton
     buildsystem: meson
     build-options:
-      ldflags: *mingw-ldflags
+      ldflags: ''
       ldflags-override: true
       config-opts:
         - --cross-file=../build-win32.txt
@@ -484,8 +476,8 @@ modules:
   - name: dxvk
     subdir: dxvk
     buildsystem: meson
-    build-options: &dxvk_64_build_options
-      ldflags: *mingw-ldflags
+    build-options:
+      ldflags: ''
       ldflags-override: true
       config-opts:
         - --cross-file=../build-win64.txt
@@ -515,8 +507,8 @@ modules:
   - name: dxvk-32bit
     subdir: dxvk
     buildsystem: meson
-    build-options: &dxvk_32_build_options
-      ldflags: *mingw-ldflags
+    build-options:
+      ldflags: ''
       ldflags-override: true
       config-opts:
         - --cross-file=../build-win32.txt
@@ -537,7 +529,7 @@ modules:
       - cp -a . ${FLATPAK_DEST}/share/wine/mono/wine-mono-5.1.1
     sources:
       - type: archive
-        url: "https://github.com/madewokherd/wine-mono/releases/download/wine-mono-5.1.1/wine-mono-5.1.1-x86.tar.xz"
+        url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-5.1.1/wine-mono-5.1.1-x86.tar.xz
         sha256: b17ac815afbf5eef768c4e8d50800be02af75c8b230d668e239bad99616caa82
 
 
@@ -551,10 +543,10 @@ modules:
         done
     sources:
       - type: file
-        url: "https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.tar.bz2"
+        url: https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.tar.bz2
         sha256: 06a00cedf391ee07bbca0b3282e5c8ad9d950446d50648d2ff417716816fd1ab
       - type: file
-        url: "https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.tar.bz2"
+        url: https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.tar.bz2
         sha256: ea5246e4c91d1aa1226658e1749b6e5d0e9353b52b14df79c4b93b6e61a3c59e
 
 
@@ -566,7 +558,8 @@ modules:
     no-make-install: true
     no-parallel-make: true
     post-install:
-      - find obj-fonts/ -xtype f \( -name "*.otf" -o -name "*.ttf" \) -ls -exec install -Dm0644 -t ${FLATPAK_DEST}/share/fonts/ {} \;
+      - find obj-fonts/ -xtype f \( -name "*.otf" -o -name "*.ttf" \) -ls -exec install
+        -Dm0644 -t ${FLATPAK_DEST}/share/fonts/ {} \;
     sources:
       - *proton_source
       - type: shell
@@ -594,10 +587,10 @@ modules:
           - -DENABLE_WOFF2=OFF
           - -DENABLE_DOCS=OFF
         cleanup:
-          - "*"
+          - '*'
         sources:
           - type: archive
-            url: "https://github.com/fontforge/fontforge/releases/download/20201107/fontforge-20201107.tar.xz"
+            url: https://github.com/fontforge/fontforge/releases/download/20201107/fontforge-20201107.tar.xz
             sha256: 68bcba8f602819eddc29cd356ee13fafbad7a80d19b652d354c6791343476c78
 
       - files/afdko/python3-requirements-dev.json
@@ -622,13 +615,8 @@ modules:
   - name: proton
     buildsystem: simple
     build-commands:
-      - install -Dm755 -t ${FLATPAK_DEST}/
-          proton
-          filelock.py
-          user_settings.sample.py
-      - install -Dm644 -t ${FLATPAK_DEST}/
-          compatibilitytool.vdf
-          proton_3.7_tracked_files
+      - install -Dm755 -t ${FLATPAK_DEST}/ proton filelock.py user_settings.sample.py
+      - install -Dm644 -t ${FLATPAK_DEST}/ compatibilitytool.vdf proton_3.7_tracked_files
       - install -Dm644 toolmanifest_noruntime.vdf ${FLATPAK_DEST}/toolmanifest.vdf
       - install -Dm644 dist.LICENSE ${FLATPAK_DEST}/LICENSE
       - |
@@ -650,7 +638,8 @@ modules:
         ln -s ../share dist/share
         ln -s ../version dist/version
       - install -Dm644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
-      - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}
+      - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
+        ${FLATPAK_ID}
     sources:
       - *proton_source
       - type: patch
