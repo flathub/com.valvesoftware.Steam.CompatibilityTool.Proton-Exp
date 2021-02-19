@@ -51,6 +51,9 @@ x-proton-source: &proton_source
   url: "https://github.com/ValveSoftware/Proton.git"
   tag: experimental-5.13-20210126
   commit: c8a48ac264758d7411965a60578edfbfe7aec6f0
+  x-checker-data:
+    type: git
+    tag-pattern: ^experimental-([\d\.-]+)$
 
 cleanup:
   - "*.a"
@@ -638,10 +641,6 @@ modules:
           -e "s/@VERSION@/${PROTON_VERSION}/g" \
           -e "s/@BUILD@/${TIMESTAMP}/g" \
           -i ${FLATPAK_DEST}/compatibilitytool.vdf
-        sed \
-          -e "s/@VERSION@/${PROTON_VERSION}/g" \
-          -e "s/@DATE@/${PROTON_DATE}/g" \
-          -i ${FLATPAK_ID}.metainfo.xml
       - |
         cd ${FLATPAK_DEST}
         mkdir dist
