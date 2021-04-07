@@ -45,7 +45,7 @@ x-proton-source: &proton_source
   commit: 08bbe989331bb4b30a309e15916375f99f983de6
   x-checker-data:
     type: git
-    tag-pattern: ^experimental-([\d\.-]+)$
+    tag-pattern: ^experimental-([\d\.-]+\w?)$
 
 cleanup:
   - '*.a'
