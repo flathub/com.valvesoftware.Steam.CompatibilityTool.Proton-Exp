@@ -41,8 +41,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-6.3-20210402c
-  commit: af7e25a3c8cd2800fbcaf3935a24b80be6ab5e36
+  tag: experimental-6.3-20210407b
+  commit: 08e676c6b7521f35d3562920640ed23222ee8abc
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -434,7 +434,7 @@ modules:
   - name: glslang
     buildsystem: cmake-ninja
     cleanup:
-      - "*"
+      - '*'
     sources:
       - type: archive
         url: https://github.com/KhronosGroup/glslang/archive/refs/tags/11.2.0.tar.gz
