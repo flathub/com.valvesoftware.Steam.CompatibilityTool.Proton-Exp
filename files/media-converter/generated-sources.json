@@ -237,7 +237,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs/repository/archive.tar.gz?ref=634d231269ab9b68c722c5037d1c94bed97ba45c",
-        "sha256": "c00f41987694771ddd83f8c56b0739cb7816a641b1c5f46016b6c86255466d5d",
+        "sha256": "e136333139c02164554b84192978b77ff1ca302c248f4a62ec4400636fa5819b",
         "dest": "media-converter/cargo/vendor/gst-plugin-version-helper"
     },
     {
@@ -258,7 +258,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
-        "sha256": "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+        "sha256": "1e2dd43135d295b380bfe7929f981f32ba25cc27908dd9357abad0268e2b9f28",
         "dest": "media-converter/cargo/vendor/gstreamer"
     },
     {
@@ -279,7 +279,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
-        "sha256": "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+        "sha256": "4708efbbd1c92b8c9e70e8103a65df33d022e60f50687d9c68a6fbe814eb9051",
         "dest": "media-converter/cargo/vendor/gstreamer-audio"
     },
     {
@@ -300,7 +300,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
-        "sha256": "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+        "sha256": "175a21bb2f294a8b480f4c7685b3dfdb524a65b43e31e8273b6e0ba4b2e05602",
         "dest": "media-converter/cargo/vendor/gstreamer-audio-sys"
     },
     {
@@ -321,7 +321,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
-        "sha256": "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+        "sha256": "9f68e41efe756f2ccb0ccb280accf2187f786288a20caf43ef5acddeaab5701b",
         "dest": "media-converter/cargo/vendor/gstreamer-base"
     },
     {
@@ -342,7 +342,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
-        "sha256": "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+        "sha256": "5d90d541324472ec81d138a88e42026c6ced389bd3e436f3232a8aff1f18f61f",
         "dest": "media-converter/cargo/vendor/gstreamer-base-sys"
     },
     {
@@ -363,7 +363,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
-        "sha256": "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+        "sha256": "5eca97c445288c0d37f1c393f25875b3e4fe4ef72cc3e6c40c82a40d90742026",
         "dest": "media-converter/cargo/vendor/gstreamer-sys"
     },
     {
@@ -384,7 +384,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
-        "sha256": "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+        "sha256": "a01ab6b85612d5cb0140a73f38cbd8a2fd5b3cdbcee0760b5fc80a4599e7e21d",
         "dest": "media-converter/cargo/vendor/gstreamer-video"
     },
     {
@@ -405,7 +405,7 @@
         "type": "archive",
         "archive-type": "tar-gzip",
         "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
-        "sha256": "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+        "sha256": "5782337f57bc32e1a5ef9b5738b895204e7b2b41185fcab81b657349d7821034",
         "dest": "media-converter/cargo/vendor/gstreamer-video-sys"
     },
     {
