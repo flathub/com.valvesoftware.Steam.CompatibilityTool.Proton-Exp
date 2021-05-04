@@ -41,8 +41,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-6.3-20210429
-  commit: 53847618ccaeb1e29438e75f554849ff330c545d
+  tag: experimental-6.3-20210503
+  commit: 060e02cfe20a90cc6255f2d5f3b0e996299581ce
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -541,11 +541,11 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p ${FLATPAK_DEST}/share/wine/mono
-      - cp -a . ${FLATPAK_DEST}/share/wine/mono/wine-mono-6.1.1
+      - cp -a . ${FLATPAK_DEST}/share/wine/mono/wine-mono-6.1.2
     sources:
       - type: archive
-        url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.1/wine-mono-6.1.1-x86.tar.xz
-        sha256: c3bab46c3e69ecdda61532c28c6a94a78aef9c750cc18dbb60151e0697714d6d
+        url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.2/wine-mono-6.1.2-x86.tar.xz
+        sha256: 463efcae9aec82e2ae51adbafe542f2a0674e1a1d0899d732077211f5c62d182
 
 
   - name: wine-gecko-bin
