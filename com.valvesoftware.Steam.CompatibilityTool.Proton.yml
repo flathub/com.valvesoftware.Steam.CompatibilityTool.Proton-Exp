@@ -41,8 +41,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-6.3-20210521b
-  commit: 0a5eb64509ae969b00729e0711e6ecfe3f380947
+  tag: experimental-6.3-20210602b
+  commit: cc7ad4bd13bb88ce194270908cc5243b8dc0613a
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -566,20 +566,19 @@ modules:
 
 
   - name: fonts
-    buildsystem: autotools
-    no-autogen: true
-    make-args:
-      - fonts
-    no-make-install: true
-    no-parallel-make: true
-    post-install:
+    buildsystem: simple
+    build-commands:
+      - |
+        cat <<EOF > Makefile
+        SRCDIR     := $(pwd)
+        BUILD_NAME := proton-flatpak
+        include \$(SRCDIR)/build/makefile_base.mak
+        EOF
+      - make fonts
       - find obj-fonts/ -xtype f \( -name "*.otf" -o -name "*.ttf" \) -ls -exec install
         -Dm0644 -t ${FLATPAK_DEST}/share/fonts/ {} \;
     sources:
       - *proton_source
-      - type: shell
-        commands:
-          - ./configure.sh --no-steam-runtime
     modules:
 
       - name: fontforge
