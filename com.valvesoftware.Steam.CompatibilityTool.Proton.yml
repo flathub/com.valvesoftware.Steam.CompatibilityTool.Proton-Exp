@@ -562,8 +562,8 @@ modules:
       - cp -a . ${FLATPAK_DEST}/share/wine/mono/wine-mono-6.1.2
     sources:
       - type: archive
-        url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.2/wine-mono-6.1.2-x86.tar.xz
-        sha256: 463efcae9aec82e2ae51adbafe542f2a0674e1a1d0899d732077211f5c62d182
+        url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.4.1/wine-mono-6.4.1-x86.tar.xz
+        sha256: a70c865e590058fa6fc3aa47425646405bdda27f78b9aa6d2030d2d2a8efadbb
 
 
   - name: wine-gecko-bin
