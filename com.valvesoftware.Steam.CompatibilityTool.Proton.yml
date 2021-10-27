@@ -40,8 +40,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-6.3-20211020
-  commit: 0d8ab95d904b0e9cc4992e3dcb324a005eb3127b
+  tag: experimental-6.3-20211027
+  commit: 00b867845d8e91233db20d125e76ead1a1e724b6
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -221,9 +221,12 @@ modules:
       - .
     make-args:
       - LIBRARIES=-ldl
+    build-commands:
+      - winebuild --dll --fake-module -E lsteamclient.spec -o lsteamclient.dll.fake
     no-make-install: true
     post-install:
-      - install -Dm755 lsteamclient.dll.so -t ${FLATPAK_DEST}/lib/wine/
+      - install -Dm755 lsteamclient.dll.so ${FLATPAK_DEST}/lib/wine/lsteamclient.dll.so
+      - install -Dm755 lsteamclient.dll.fake ${FLATPAK_DEST}/lib/wine/fakedlls/lsteamclient.dll
     sources: &lsteamclient_sources
       - *proton_source
       - type: file
@@ -249,13 +252,16 @@ modules:
     config-opts: *lsteamclient_config_opts
     make-args:
       - LIBRARIES=-ldl
+    build-commands:
+      - winebuild --dll --fake-module -E lsteamclient.spec -o lsteamclient.dll.fake
     no-make-install: true
     post-install:
-      - install -Dm755 lsteamclient.dll.so -t ${FLATPAK_DEST}/lib32/wine/
+      - install -Dm755 lsteamclient.dll.so ${FLATPAK_DEST}/lib32/wine/lsteamclient.dll.so
+      - install -Dm755 lsteamclient.dll.fake ${FLATPAK_DEST}/lib32/wine/fakedlls/lsteamclient.dll
     sources: *lsteamclient_sources
 
 
-  - name: libsteam_api-bin-32bit
+  - name: libsteam_api-bin
     #WARNING proprietary
     build-options:
       strip: false
@@ -263,10 +269,46 @@ modules:
     subdir: steam_helper
     buildsystem: simple
     build-commands:
-      - install -Dm755 libsteam_api.so -t ${FLATPAK_DEST}/lib32/
+      - install -Dm755 64/libsteam_api.so -t ${FLATPAK_DEST}/lib/
+      - install -Dm755 32/libsteam_api.so -t ${FLATPAK_DEST}/lib32/
     sources:
       - *proton_source
 
+
+  - name: steam_helper
+    subdir: steam_helper
+    build-options:
+      config-opts:
+        - -L${FLATPAK_DEST}/lib
+        - -L${FLATPAK_DEST}/lib/wine
+    config-opts: &steam_helper-config-opts
+      - --nosource-fix
+      - --nolower-include
+      - --nodlls
+      - --nomsvcrt
+      - -I${FLATPAK_DEST}/include
+      - -I${FLATPAK_DEST}/include/wine
+      - -I${FLATPAK_DEST}/include/wine/windows
+      - -I../lsteamclient/steamworks_sdk_142
+      - -I../wine/include
+      - -I../openvr/headers
+      - -lsteam_api
+      - -lole32
+      - -ldl
+      - --guiexe
+      - .
+    build-commands: &steam_helper-build-commands
+      - winebuild --exe --fake-module -F steam -o steam.exe.fake
+    no-make-install: true
+    post-install:
+      - install -Dm755 steam_helper.exe.so ${FLATPAK_DEST}/lib/wine/steam.exe.so
+      - install -Dm755 steam.exe.fake ${FLATPAK_DEST}/lib/wine/fakedlls/steam.exe
+    sources: &steam_helper-sources
+      - *proton_source
+      - type: file
+        path: winemaker-configure.sh
+        dest: steam_helper
+        dest-filename: configure
 
   - name: steam_helper-32bit
     subdir: steam_helper
@@ -275,35 +317,19 @@ modules:
     build-options:
       arch:
         x86_64: *compat_i386_opts
-    config-opts:
-      - --nosource-fix
-      - --nolower-include
-      - --nodlls
-      - --nomsvcrt
-      - --wine32
-      - -I${FLATPAK_DEST}/include
-      - -I${FLATPAK_DEST}/include/wine
-      - -I${FLATPAK_DEST}/include/wine/windows
-      - -I../lsteamclient/steamworks_sdk_142
-      - -I../wine/include
-      - -I../openvr/headers
-      - -L${FLATPAK_DEST}/lib32
-      - -L${FLATPAK_DEST}/lib32/wine
-      - -lsteam_api
-      - -lole32
-      - -ldl
-      - --guiexe
-      - .
-    make-args: *winemaker_m32_make_args
+      config-opts:
+        - -L${FLATPAK_DEST}/lib32
+        - -L${FLATPAK_DEST}/lib32/wine
+        - --wine32
+      make-args: *winemaker_m32_make_args
+    config-opts: *steam_helper-config-opts
+    build-commands:
+      - winebuild --exe --fake-module -F steam -o steam.exe.fake
     no-make-install: true
     post-install:
       - install -Dm755 steam_helper.exe.so ${FLATPAK_DEST}/lib32/wine/steam.exe.so
-    sources:
-      - *proton_source
-      - type: file
-        path: winemaker-configure.sh
-        dest: steam_helper
-        dest-filename: configure
+      - install -Dm755 steam.exe.fake ${FLATPAK_DEST}/lib32/wine/fakedlls/steam.exe
+    sources: *steam_helper-sources
 
 
   - name: openvr
