@@ -40,8 +40,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-6.3-20211027
-  commit: 00b867845d8e91233db20d125e76ead1a1e724b6
+  tag: experimental-6.3-20211101
+  commit: 48e5845d50caec36066dfb7ad40037e1d02b72bb
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -297,7 +297,7 @@ modules:
       - -ldl
       - --guiexe
       - .
-    build-commands: &steam_helper-build-commands
+    build-commands:
       - winebuild --exe --fake-module -F steam -o steam.exe.fake
     no-make-install: true
     post-install:
