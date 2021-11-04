@@ -459,14 +459,14 @@ modules:
     subdir: vkd3d
     build-options:
       ldflags: >-
-        -L/usr/lib/sdk/mingw-w64/x86_64-w64-mingw32/lib
-        -L/app/share/steam/compatibilitytools.d/Proton-Exp/lib/wine
+        -L/run/build/vkd3d/wine/dlls/vulkan-1
       ldflags-override: true
       config-opts:
         - --host=x86_64-w64-mingw32
       env:
         CC: ccache x86_64-w64-mingw32-gcc
         LD: x86_64-w64-mingw32-ld
+        LIBDIR_WINE_PE: /app/share/steam/compatibilitytools.d/Proton-Exp/lib/wine
       prefix: /app/share/steam/compatibilitytools.d/Proton-Exp/lib/vkd3d/prefix
     config-opts: &vkd3d-config-opts
       - --disable-doxygen-doc
@@ -477,6 +477,9 @@ modules:
       - mv -v ${FLATPAK_DEST}/lib/vkd3d/{prefix/bin/,}libvkd3d-shader-1.dll
     sources: &vkd3d-sources
       - *proton_source
+      - type: shell
+        commands:
+          - install -D $LIBDIR_WINE_PE/vulkan-1.dll -t wine/dlls/vulkan-1/
     cleanup:
       - /lib/vkd3d/prefix
 
@@ -485,14 +488,14 @@ modules:
     subdir: vkd3d
     build-options:
       ldflags: >-
-        -L/usr/lib/sdk/mingw-w64/i686-w64-mingw32/lib
-        -L/app/share/steam/compatibilitytools.d/Proton-Exp/lib32/wine
+        -L/run/build/vkd3d-32bit/wine/dlls/vulkan-1
       ldflags-override: true
       config-opts:
         - --host=i686-w64-mingw32
       env:
         CC: ccache i686-w64-mingw32-gcc
         LD: i686-w64-mingw32-ld
+        LIBDIR_WINE_PE: /app/share/steam/compatibilitytools.d/Proton-Exp/lib32/wine
       prefix: /app/share/steam/compatibilitytools.d/Proton-Exp/lib32/vkd3d/prefix
     config-opts: *vkd3d-config-opts
     post-install:
