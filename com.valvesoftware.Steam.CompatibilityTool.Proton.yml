@@ -48,8 +48,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-7.0-20220322
-  commit: ca3c168c791e416a70ab5c39a794059d684a6b81
+  tag: experimental-7.0-20220323
+  commit: 4f6ae41fcfa1f5dd33f702cf4746220343175c17
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -654,6 +654,26 @@ modules:
 
       - files/afdko/python3-requirements-dev.json
       - files/afdko/python3-requirements.json
+
+      - name: afdko-script
+        buildsystem: simple
+        build-commands:
+          - install -Dm755 -t ${FLATPAK_DEST}/bin afdko
+        sources:
+          - type: script
+            dest-filename: afdko
+            commands:
+              - exec "$@"
+
+      - name: rsync
+        config-opts:
+          - --disable-xxhash
+        cleanup:
+          - '*'
+        sources:
+          - type: archive
+            url: https://www.samba.org/ftp/rsync/src/rsync-3.2.3.tar.gz
+            sha256: becc3c504ceea499f4167a260040ccf4d9f2ef9499ad5683c179a697146ce50e
 
 
   - name: default-prefix
