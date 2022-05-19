@@ -48,8 +48,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-7.0-20220511
-  commit: f2edf06c2551c16730664113e3fd88ab513d8f2d
+  tag: experimental-7.0-20220518b
+  commit: 3d921217ac751743ab534fc935a25c72ea76398c
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
@@ -123,6 +123,10 @@ modules:
         dest: wine
         commands:
           - autoreconf -fiv
+      - &wine-source-winevulkan
+        type: shell
+        dest: wine
+        commands:
           - tools/make_requests
           - dlls/winevulkan/make_vulkan --xml vk.xml
 
@@ -243,6 +247,7 @@ modules:
       - install -Dm755 steam.exe.fake ${FLATPAK_LIBDIR_WINE_PE}/steam.exe
     sources: &steam_helper-sources
       - *proton_source
+      - *wine-source-winevulkan
       - type: file
         path: winemaker-configure.sh
         dest: steam_helper
@@ -357,6 +362,7 @@ modules:
       - install -Dm755 wineopenxr.dll.fake ${FLATPAK_LIBDIR_WINE_PE}/wineopenxr.dll
     sources:
       - *proton_source
+      - *wine-source-winevulkan
       - type: file
         path: winemaker-configure.sh
         dest: wineopenxr
