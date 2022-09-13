@@ -48,8 +48,8 @@ x-compat-i386-opts: &compat_i386_opts
 x-proton-source: &proton_source
   type: git
   url: https://github.com/ValveSoftware/Proton.git
-  tag: experimental-7.0-20220907
-  commit: 89232242e2d50dd0c3337a27547fe0b291137fe5
+  tag: experimental-7.0-20220913
+  commit: 9d2e532bdfe4456b243aa084214b34d79fda9dbe
   x-checker-data:
     type: git
     tag-pattern: ^experimental-([\d\.-]+\w?)$
