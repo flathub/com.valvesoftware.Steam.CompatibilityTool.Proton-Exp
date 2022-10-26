@@ -14,6 +14,7 @@
   <project_license>BSD-3-Clause and LGPL-2.1 and zlib-acknowledgement and Zlib and OFL-1.1 and MIT and MPL-2.0 and LicenseRef-proprietary</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <releases>
+    <release version="7.0-20221026" date="2022-10-26"/>
     <release version="7.0-20221012" date="2022-10-12"/>
     <release version="7.0-20221011" date="2022-10-11"/>
     <release version="7.0-20221005b" date="2022-10-05"/>
