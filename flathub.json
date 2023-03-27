@@ -1,5 +1,6 @@
 {
   "skip-icons-check": true,
   "automerge-flathubbot-prs": true,
-  "only-arches": ["x86_64"]
+  "only-arches": ["x86_64"],
+  "end-of-life": "Maintenance halted due to lack of resources. If you are interested in maintaining this Proton build, contact Flathub admins."
 }
