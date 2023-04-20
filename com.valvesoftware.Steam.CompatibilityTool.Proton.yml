@@ -147,6 +147,10 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine_sources
       - *proton_source
+      - type: patch
+        dest: wine
+        paths:
+          - patches/wine/116-fsr.patch
       - type: shell
         dest: wine
         commands:
